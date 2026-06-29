@@ -90,36 +90,31 @@ function initThreeJS() {
     ctx.lineWidth = 1;
     ctx.strokeRect(20, 20, 472, 216);
 
-    // Brand text
-    ctx.fillStyle = '#E0982E';
-    ctx.font = 'bold 48px Georgia, serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('FAST MART', 256, 90);
-
-    // Subtitle
-    ctx.fillStyle = '#F5CC84';
-    ctx.font = 'italic 24px Georgia, serif';
-    ctx.fillText('Premium Craft Selection', 256, 130);
-
-    // Location
-    ctx.fillStyle = '#B8A99A';
-    ctx.font = '16px Arial, sans-serif';
-    ctx.fillText('Creswell, Oregon', 256, 170);
-
-    // Decorative line
-    ctx.strokeStyle = '#E0982E';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(180, 190);
-    ctx.lineTo(332, 190);
-    ctx.stroke();
-
-    // Est. date
-    ctx.fillStyle = '#7A6E63';
-    ctx.font = '14px Arial, sans-serif';
-    ctx.fillText('Est. 1987', 256, 220);
+    // Tagline (drawn now; the brand logo is layered on top once it loads).
+    const drawTagline = () => {
+        ctx.fillStyle = '#B8A99A';
+        ctx.font = '18px Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Creswell, Oregon · Est. 1987', 256, 226);
+    };
+    drawTagline();
 
     const labelTexture = new THREE.CanvasTexture(labelCanvas);
+
+    // Draw the real Fast Mart logo onto the bottle label. Same-origin PNG, so
+    // the canvas isn't tainted; the texture refreshes once the image decodes.
+    // If it fails to load, the bordered label + tagline remain as a fallback.
+    const fmLogo = new Image();
+    fmLogo.onload = () => {
+        const maxW = 430, maxH = 150;
+        const s = Math.min(maxW / fmLogo.width, maxH / fmLogo.height);
+        const w = fmLogo.width * s, h = fmLogo.height * s;
+        ctx.drawImage(fmLogo, (512 - w) / 2, 48, w, h);
+        drawTagline();
+        labelTexture.needsUpdate = true;
+    };
+    fmLogo.src = 'assets/fast-mart-logo.png';
+
     const labelGeo = new THREE.CylinderGeometry(0.72, 0.77, 1.6, 32, 1, true);
     const labelMat = new THREE.MeshStandardMaterial({
         map: labelTexture,
