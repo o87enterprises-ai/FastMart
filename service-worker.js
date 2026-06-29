@@ -5,13 +5,18 @@
 /* install so the shell still loads without a connection. Bump CACHE   */
 /* whenever you ship asset changes to force clients to refresh. */
 
-const CACHE = 'fast-mart-v3';
+const CACHE = 'fast-mart-v4';
 
 const PRECACHE = [
     '/',
     '/index.html',
     '/manifest.webmanifest',
-    '/icons/icon.svg',
+    '/favicon.ico',
+    '/icons/favicon-32.png',
+    '/icons/icon-192.png',
+    '/icons/icon-512.png',
+    '/icons/icon-maskable-512.png',
+    '/icons/apple-touch-icon.png',
     '/assets/fast-mart-logo.png',
     '/src/css/tokens.css',
     '/src/css/base.css',

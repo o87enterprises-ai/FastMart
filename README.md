@@ -19,9 +19,15 @@ maintainable layout. The look, feel, and behavior are unchanged.
 ├── robots.txt                  # SEO crawl directives
 ├── sitemap.xml                 # SEO sitemap
 ├── _headers                    # Cloudflare Pages caching / SW scope headers
-├── icons/
-│   ├── icon.svg                # App icon (any)
-│   └── icon-maskable.svg       # App icon (maskable safe-zone)
+├── favicon.ico                 # Multi-size favicon (16/32/48)
+├── assets/
+│   └── fast-mart-logo.png      # Official brand logo (transparent)
+├── icons/                      # PWA / device icons generated from the logo
+│   ├── favicon-32.png
+│   ├── icon-192.png            # App icon (any)
+│   ├── icon-512.png            # App icon (any)
+│   ├── icon-maskable-512.png   # App icon (maskable safe-zone)
+│   └── apple-touch-icon.png    # iOS home-screen icon (180)
 └── src/
     ├── css/
     │   ├── tokens.css          # Design tokens (:root brand variables)

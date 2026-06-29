@@ -77,7 +77,7 @@ function requestNotification(beerName) {
             if (permission === 'granted') {
                 new Notification('Fast Mart - Waitlist', {
                     body: `We'll notify you when ${beerName} is back in stock!`,
-                    icon: '/icons/icon.svg'
+                    icon: '/icons/icon-192.png'
                 });
             } else {
                 alert(`You're on the waitlist for ${beerName}! We'll email you when it's back.`);
