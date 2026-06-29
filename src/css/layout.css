@@ -10,7 +10,7 @@
     right: 0;
     z-index: 100;
     padding: 16px 24px;
-    background: rgba(13, 10, 7, 0.7);
+    background: rgba(8, 33, 27, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
@@ -20,7 +20,7 @@
 
 .main-nav.scrolled {
     padding: 12px 24px;
-    background: rgba(13, 10, 7, 0.9);
+    background: rgba(8, 33, 27, 0.9);
 }
 
 .nav-container {
@@ -129,12 +129,12 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(200, 162, 110, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(224, 152, 46, 0.2), transparent);
     transition: left 0.5s ease;
 }
 
 .nav-cta:hover {
-    background: rgba(200, 162, 110, 0.1);
+    background: rgba(224, 152, 46, 0.1);
     box-shadow: var(--shadow-gold);
     transform: translateY(-2px);
 }
@@ -169,6 +169,20 @@
 .hero-content {
     max-width: 800px;
     will-change: transform, opacity;
+}
+
+/* Placeholder logo (current sign). Framed like a lightbox panel so the
+   white sign sits cleanly on the deep-green hero. */
+.hero-logo {
+    display: block;
+    width: min(460px, 82vw);
+    height: auto;
+    margin: 0 auto 36px;
+    border-radius: var(--radius-md);
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.55),
+        0 0 0 1px var(--glass-border),
+        var(--shadow-gold);
 }
 
 .hero-badge {
@@ -274,7 +288,7 @@
 }
 
 .btn-secondary:hover {
-    background: rgba(200, 162, 110, 0.1);
+    background: rgba(224, 152, 46, 0.1);
     box-shadow: var(--shadow-gold);
     transform: translateY(-3px);
 }

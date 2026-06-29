@@ -15,7 +15,7 @@ function initThreeJS() {
 
     // Scene setup
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0D0A07, 0.035);
+    scene.fog = new THREE.FogExp2(0x08211B, 0.035);
 
     // Camera
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
@@ -29,7 +29,7 @@ function initThreeJS() {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.setClearColor(0x0D0A07, 1);
+    renderer.setClearColor(0x08211B, 1);
 
     // ============================================
     // BUILD PREMIUM CRAFT BEER BOTTLE
@@ -77,27 +77,27 @@ function initThreeJS() {
     const ctx = labelCanvas.getContext('2d');
 
     // Label background
-    ctx.fillStyle = '#0D0A07';
+    ctx.fillStyle = '#08211B';
     ctx.fillRect(0, 0, 512, 256);
 
     // Gold border
-    ctx.strokeStyle = '#C8A26E';
+    ctx.strokeStyle = '#E0982E';
     ctx.lineWidth = 4;
     ctx.strokeRect(8, 8, 496, 240);
 
     // Inner border
-    ctx.strokeStyle = '#E8C99B';
+    ctx.strokeStyle = '#F5CC84';
     ctx.lineWidth = 1;
     ctx.strokeRect(20, 20, 472, 216);
 
     // Brand text
-    ctx.fillStyle = '#C8A26E';
+    ctx.fillStyle = '#E0982E';
     ctx.font = 'bold 48px Georgia, serif';
     ctx.textAlign = 'center';
     ctx.fillText('FAST MART', 256, 90);
 
     // Subtitle
-    ctx.fillStyle = '#E8C99B';
+    ctx.fillStyle = '#F5CC84';
     ctx.font = 'italic 24px Georgia, serif';
     ctx.fillText('Premium Craft Selection', 256, 130);
 
@@ -107,7 +107,7 @@ function initThreeJS() {
     ctx.fillText('Creswell, Oregon', 256, 170);
 
     // Decorative line
-    ctx.strokeStyle = '#C8A26E';
+    ctx.strokeStyle = '#E0982E';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(180, 190);
@@ -136,9 +136,9 @@ function initThreeJS() {
     neckLabelCanvas.width = 256;
     neckLabelCanvas.height = 128;
     const nCtx = neckLabelCanvas.getContext('2d');
-    nCtx.fillStyle = '#C8A26E';
+    nCtx.fillStyle = '#E0982E';
     nCtx.fillRect(0, 0, 256, 128);
-    nCtx.fillStyle = '#0D0A07';
+    nCtx.fillStyle = '#08211B';
     nCtx.font = 'bold 20px Arial';
     nCtx.textAlign = 'center';
     nCtx.fillText('FAST MART', 128, 50);
@@ -159,7 +159,7 @@ function initThreeJS() {
     // Cap
     const capGeo = new THREE.CylinderGeometry(0.38, 0.38, 0.1, 32);
     const capMat = new THREE.MeshStandardMaterial({
-        color: 0xC8A26E,
+        color: 0xE0982E,
         metalness: 0.8,
         roughness: 0.2
     });
@@ -194,7 +194,7 @@ function initThreeJS() {
     particleGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     const particleMat = new THREE.PointsMaterial({
-        color: 0xC8A26E,
+        color: 0xE0982E,
         size: 0.05,
         transparent: true,
         opacity: 0.6,
@@ -209,19 +209,19 @@ function initThreeJS() {
     // ============================================
     // LIGHTING: Warm Amber Glow
     // ============================================
-    const ambientLight = new THREE.AmbientLight(0x1a1510, 0.5);
+    const ambientLight = new THREE.AmbientLight(0x0F2E26, 0.5);
     scene.add(ambientLight);
 
     // Rotating point light for dynamic amber glow
-    pointLight = new THREE.PointLight(0xC8A26E, 2, 20);
+    pointLight = new THREE.PointLight(0xE0982E, 2, 20);
     pointLight.position.set(3, 3, 3);
     scene.add(pointLight);
 
-    const pointLight2 = new THREE.PointLight(0xE8C99B, 1, 15);
+    const pointLight2 = new THREE.PointLight(0xF5CC84, 1, 15);
     pointLight2.position.set(-3, -2, 4);
     scene.add(pointLight2);
 
-    const rimLight = new THREE.DirectionalLight(0xC8A26E, 0.8);
+    const rimLight = new THREE.DirectionalLight(0xE0982E, 0.8);
     rimLight.position.set(0, 5, -5);
     scene.add(rimLight);
 

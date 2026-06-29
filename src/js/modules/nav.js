@@ -19,7 +19,7 @@ function toggleMobileMenu() {
     navLinks.style.left = '0';
     navLinks.style.right = '0';
     navLinks.style.flexDirection = 'column';
-    navLinks.style.background = 'rgba(13, 10, 7, 0.95)';
+    navLinks.style.background = 'rgba(8, 33, 27, 0.95)';
     navLinks.style.padding = '20px';
     navLinks.style.backdropFilter = 'blur(20px)';
     navLinks.style.borderBottom = '1px solid var(--glass-border)';

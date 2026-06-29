@@ -9,6 +9,6 @@
 setTimeout(initThreeJS, 100);
 
 // Console branding
-console.log('%c Fast Mart ', 'background: #C8A26E; color: #0D0A07; font-size: 24px; font-weight: bold; padding: 10px 20px; border-radius: 8px;');
-console.log('%c Premium Craft Beer Boutique | Creswell, Oregon ', 'color: #C8A26E; font-size: 14px;');
+console.log('%c Fast Mart ', 'background: #E0982E; color: #08211B; font-size: 24px; font-weight: bold; padding: 10px 20px; border-radius: 8px;');
+console.log('%c Premium Craft Beer Boutique | Creswell, Oregon ', 'color: #E0982E; font-size: 14px;');
 console.log('%c Family-owned since 1987 ', 'color: #7A6E63; font-size: 12px;');

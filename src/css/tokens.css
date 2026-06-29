@@ -2,22 +2,37 @@
 /* DESIGN TOKENS — single source of truth for the brand palette. */
 /* Token-based design keeps the UI consistent and makes re-theming */
 /* a matter of editing this one file. */
+/*                                                                  */
+/* Palette is matched to the real Fast Mart sign: a deep pine-green */
+/* wordmark + amber/gold lightning bolt on white. The historical    */
+/* var names (--bg-obsidian*, --accent-gold*) are kept so the rest  */
+/* of the codebase doesn't have to change; their VALUES are now the */
+/* brand green/amber. --brand-* aliases below are the canonical names. */
 /* ============================================ */
 :root {
-    --bg-obsidian: #0D0A07;
-    --bg-obsidian-light: #1A1510;
-    --bg-obsidian-lighter: #252018;
-    --accent-gold: #C8A26E;
-    --accent-gold-light: #D4B47E;
-    --glow-ember: #E8C99B;
+    /* Brand colors (canonical) */
+    --brand-green: #14513B;        /* logo wordmark green */
+    --brand-green-deep: #08211B;   /* near-black green, page base */
+    --brand-amber: #E0982E;        /* logo lightning-bolt amber */
+    --brand-cream: #F5F0EB;
+
+    /* Surfaces (deep green instead of the old obsidian black) */
+    --bg-obsidian: #08211B;
+    --bg-obsidian-light: #0F2E26;
+    --bg-obsidian-lighter: #16382E;
+
+    /* Accent (amber/gold lightning bolt) */
+    --accent-gold: #E0982E;
+    --accent-gold-light: #EDB052;
+    --glow-ember: #F5CC84;
     --text-primary: #F5F0EB;
     --text-secondary: #B8A99A;
     --text-muted: #7A6E63;
-    --glass-bg: rgba(200, 162, 110, 0.06);
-    --glass-border: rgba(200, 162, 110, 0.12);
-    --glass-border-hover: rgba(200, 162, 110, 0.25);
-    --shadow-gold: 0 0 30px rgba(200, 162, 110, 0.15);
-    --shadow-gold-strong: 0 0 50px rgba(200, 162, 110, 0.3);
+    --glass-bg: rgba(224, 152, 46, 0.06);
+    --glass-border: rgba(224, 152, 46, 0.12);
+    --glass-border-hover: rgba(224, 152, 46, 0.25);
+    --shadow-gold: 0 0 30px rgba(224, 152, 46, 0.15);
+    --shadow-gold-strong: 0 0 50px rgba(224, 152, 46, 0.3);
     --font-heading: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --radius-sm: 8px;

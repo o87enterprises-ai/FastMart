@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <!-- Full-bleed background so the icon survives the maskable safe-zone crop. -->
-  <rect width="512" height="512" fill="#0D0A07"/>
-  <circle cx="256" cy="256" r="120" fill="none" stroke="#C8A26E" stroke-width="14"/>
-  <text x="256" y="295" text-anchor="middle" font-family="Georgia, 'Playfair Display', serif" font-size="115" font-weight="700" fill="#C8A26E">FM</text>
+  <rect width="512" height="512" fill="#08211B"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#E0982E" stroke-width="14"/>
+  <text x="256" y="295" text-anchor="middle" font-family="Georgia, 'Playfair Display', serif" font-size="115" font-weight="700" fill="#E0982E">FM</text>
 </svg>
