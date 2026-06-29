@@ -8,40 +8,40 @@
 const CACHE = 'fast-mart-v5';
 
 const PRECACHE = [
-    '/',
-    '/index.html',
-    '/manifest.webmanifest',
-    '/favicon.ico',
-    '/icons/favicon-32.png',
-    '/icons/icon-192.png',
-    '/icons/icon-512.png',
-    '/icons/icon-maskable-512.png',
-    '/icons/apple-touch-icon.png',
-    '/assets/fast-mart-logo.svg',
-    '/assets/fast-mart-logo.png',
-    '/src/css/tokens.css',
-    '/src/css/base.css',
-    '/src/css/layout.css',
-    '/src/css/modules.css',
-    '/src/css/services.css',
-    '/src/css/responsive.css',
-    '/src/js/data/config.js',
-    '/src/js/data/inventory.js',
-    '/src/js/data/deals.js',
-    '/src/js/services/store.js',
-    '/src/js/modules/loading.js',
-    '/src/js/modules/three-scene.js',
-    '/src/js/modules/animations.js',
-    '/src/js/modules/inventory.js',
-    '/src/js/modules/loyalty.js',
-    '/src/js/modules/carousel.js',
-    '/src/js/modules/concierge.js',
-    '/src/js/modules/chat.js',
-    '/src/js/modules/nav.js',
-    '/src/js/modules/pwa.js',
-    '/src/js/modules/cart.js',
-    '/src/js/modules/reviews.js',
-    '/src/js/main.js'
+    './',
+    'index.html',
+    'manifest.webmanifest',
+    'favicon.ico',
+    'icons/favicon-32.png',
+    'icons/icon-192.png',
+    'icons/icon-512.png',
+    'icons/icon-maskable-512.png',
+    'icons/apple-touch-icon.png',
+    'assets/fast-mart-logo.svg',
+    'assets/fast-mart-logo.png',
+    'src/css/tokens.css',
+    'src/css/base.css',
+    'src/css/layout.css',
+    'src/css/modules.css',
+    'src/css/services.css',
+    'src/css/responsive.css',
+    'src/js/data/config.js',
+    'src/js/data/inventory.js',
+    'src/js/data/deals.js',
+    'src/js/services/store.js',
+    'src/js/modules/loading.js',
+    'src/js/modules/three-scene.js',
+    'src/js/modules/animations.js',
+    'src/js/modules/inventory.js',
+    'src/js/modules/loyalty.js',
+    'src/js/modules/carousel.js',
+    'src/js/modules/concierge.js',
+    'src/js/modules/chat.js',
+    'src/js/modules/nav.js',
+    'src/js/modules/pwa.js',
+    'src/js/modules/cart.js',
+    'src/js/modules/reviews.js',
+    'src/js/main.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -72,6 +72,6 @@ self.addEventListener('fetch', (event) => {
                 caches.open(CACHE).then((cache) => cache.put(event.request, copy)).catch(() => {});
                 return response;
             })
-            .catch(() => caches.match(event.request).then((cached) => cached || caches.match('/index.html')))
+            .catch(() => caches.match(event.request).then((cached) => cached || caches.match('index.html')))
     );
 });
