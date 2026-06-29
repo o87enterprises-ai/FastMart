@@ -18,6 +18,7 @@
     <meta property="og:title" content="Fast Mart - Craft Beer Boutique">
     <meta property="og:description" content="Family-owned hidden gem for rare craft beers in Creswell, Oregon.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://fastmartcreswell.com/assets/fast-mart-logo.png">
 
     <title>Fast Mart | Premium Craft Beer Boutique</title>
 
@@ -40,6 +41,7 @@
     <link rel="stylesheet" href="/src/css/base.css">
     <link rel="stylesheet" href="/src/css/layout.css">
     <link rel="stylesheet" href="/src/css/modules.css">
+    <link rel="stylesheet" href="/src/css/services.css">
     <link rel="stylesheet" href="/src/css/responsive.css">
 
     <!-- JSON-LD Structured Data: LocalBusiness Schema.org -->
@@ -115,8 +117,13 @@
                 <li><a href="#cellar">The Cellar</a></li>
                 <li><a href="#loyalty">Loyalty</a></li>
                 <li><a href="#deals">Deals</a></li>
+                <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#concierge">Visit Us</a></li>
             </ul>
+            <button class="nav-cart" onclick="openCart()" aria-label="Open your order">
+                <i class="fas fa-basket-shopping"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
             <button class="nav-cta" onclick="document.getElementById('chatModal').classList.add('open')">
                 <i class="fas fa-comment-dots"></i> Chat
             </button>
@@ -131,12 +138,12 @@
     <!-- ============================================ -->
     <section class="hero" id="hero">
         <div class="hero-content">
-            <!-- Official Fast Mart logo (transparent PNG) -->
+            <!-- Official Fast Mart logo (vector). PNG remains for social/OG. -->
             <img
-                src="/assets/fast-mart-logo.png"
+                src="/assets/fast-mart-logo.svg"
                 alt="Fast Mart — Creswell, Oregon"
                 class="hero-logo"
-                width="1000" height="525"
+                width="1000" height="642"
                 fetchpriority="high"
             >
             <div class="hero-badge">
@@ -215,10 +222,10 @@
             <div class="loyalty-card">
                 <div class="loyalty-tier">
                     <i class="fas fa-crown"></i>
-                    Gold Member
+                    <span id="memberTier">Gold Member</span>
                 </div>
-                <div class="member-name">Alex M.</div>
-                <div class="member-since">Member since March 2023</div>
+                <div class="member-name" id="memberName">Alex M.</div>
+                <div class="member-since" id="memberSince">Member since March 2023</div>
 
                 <!-- Gold Ring Progress Bar with SVG Gradient -->
                 <svg width="0" height="0" style="position:absolute;">
@@ -242,19 +249,28 @@
                     </div>
                 </div>
 
-                <p class="progress-next">
+                <p class="progress-next" id="progressNext">
                     <strong id="pointsNeeded">150</strong> points to
                     <strong>Platinum</strong>
                 </p>
 
-                <button class="btn-referral" id="referralBtn">
-                    <i class="fas fa-gift"></i>
-                    Refer a Friend
-                </button>
-            </div>
+                <div class="loyalty-actions">
+                    <button class="btn-referral" id="redeemBtn">
+                        <i class="fas fa-coins"></i>
+                        Redeem 100 pts → $5
+                    </button>
+                    <button class="btn-referral" id="referralBtn">
+                        <i class="fas fa-gift"></i>
+                        Refer a Friend
+                    </button>
+                </div>
 
-            <div class="referral-toast" id="referralToast">
-                <i class="fas fa-check-circle"></i> Referral link copied to clipboard!
+                <button class="loyalty-link" id="joinToggle" type="button">Join or switch member</button>
+                <form class="loyalty-join" id="joinForm" hidden>
+                    <input id="joinName" placeholder="Your name" autocomplete="name">
+                    <input id="joinPhone" placeholder="Mobile (optional)" autocomplete="tel">
+                    <button class="btn-directions" type="submit"><i class="fas fa-user-plus"></i> Join — get 25 pts</button>
+                </form>
             </div>
         </section>
 
@@ -338,6 +354,31 @@
         </section>
 
         <!-- ============================================ -->
+        <!-- REVIEWS -->
+        <!-- ============================================ -->
+        <section class="section reviews-section" id="reviews">
+            <div class="section-header">
+                <span class="section-label">Reviews</span>
+                <h2 class="section-title">What Creswell Says</h2>
+                <p class="section-desc">
+                    Real words from our neighbors. Leave yours below.
+                </p>
+            </div>
+
+            <div class="reviews-summary" id="reviewsSummary"></div>
+            <div class="reviews-grid" id="reviewsGrid"></div>
+
+            <form class="review-form" id="reviewForm">
+                <h3>Leave a Review</h3>
+                <input id="revName" placeholder="Your name (optional)" autocomplete="name">
+                <div class="star-input" id="starInput" data-rating="5"></div>
+                <textarea id="revText" placeholder="Tell us about your visit…" required></textarea>
+                <button class="btn-primary" type="submit">Submit Review</button>
+                <p class="review-demo">Demo only — reviews are stored locally in your browser.</p>
+            </form>
+        </section>
+
+        <!-- ============================================ -->
         <!-- FOOTER -->
         <!-- ============================================ -->
         <footer class="footer">
@@ -347,6 +388,7 @@
                 <a href="#cellar">The Cellar</a>
                 <a href="#loyalty">Loyalty</a>
                 <a href="#deals">Deals</a>
+                <a href="#reviews">Reviews</a>
                 <a href="#concierge">Visit</a>
                 <a href="#" onclick="alert('Privacy Policy coming soon'); return false;">Privacy</a>
             </div>
@@ -358,6 +400,18 @@
             <p class="footer-copy">&copy; 2024 Fast Mart. 5 South Front St, Creswell, OR 97426.</p>
         </footer>
     </div>
+
+    <!-- ============================================ -->
+    <!-- CART DRAWER (ordering) -->
+    <!-- ============================================ -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Your order">
+        <div class="cart-head">
+            <h3><i class="fas fa-basket-shopping"></i> Your Order</h3>
+            <button class="cart-x" onclick="closeCart()" aria-label="Close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-body" id="cartBody"><!-- rendered by modules/cart.js --></div>
+    </aside>
 
     <!-- ============================================ -->
     <!-- FLOATING CHAT WIDGET -->
@@ -432,6 +486,9 @@
     <script src="/src/js/data/inventory.js"></script>
     <script src="/src/js/data/deals.js"></script>
 
+    <!-- Mock backend (demo services) — must load before the modules that use it -->
+    <script src="/src/js/services/store.js"></script>
+
     <script src="/src/js/modules/loading.js"></script>
     <script src="/src/js/modules/three-scene.js"></script>
     <script src="/src/js/modules/animations.js"></script>
@@ -442,6 +499,8 @@
     <script src="/src/js/modules/chat.js"></script>
     <script src="/src/js/modules/nav.js"></script>
     <script src="/src/js/modules/pwa.js"></script>
+    <script src="/src/js/modules/cart.js"></script>
+    <script src="/src/js/modules/reviews.js"></script>
 
     <script src="/src/js/main.js"></script>
 </body>

@@ -38,9 +38,13 @@ function renderInventory(items) {
                 </div>
             </div>
             <div class="beer-price">$${beer.price.toFixed(2)} <span>/ bottle</span></div>
-            <button class="btn-notify" onclick="requestNotification('${beer.name}')">
-                <i class="fas fa-bell"></i> Notify Me When Available
-            </button>
+            ${beer.status === 'out-stock'
+                ? `<button class="btn-notify" onclick="requestNotification(${beer.id}, '${beer.name.replace(/'/g, "\\'")}')">
+                       <i class="fas fa-bell"></i> Notify Me When Available
+                   </button>`
+                : `<button class="btn-add" onclick="addToCart(${beer.id})">
+                       <i class="fas fa-plus"></i> Add to Cart
+                   </button>`}
         </div>
     `).join('');
 
@@ -71,20 +75,25 @@ document.getElementById('beerSearch').addEventListener('input', (e) => {
 /* Captures intent even when an item is out of stock, turning a lost */
 /* sale into a future one. Falls back to an alert if permission is    */
 /* denied or the Notifications API is unavailable. */
-function requestNotification(beerName) {
+function requestNotification(beerId, beerName) {
+    // Record the waitlist intent in the demo backend.
+    if (typeof FastMartAPI !== 'undefined') FastMartAPI.inventory.waitlist(beerId);
+    const confirm = () => (typeof fmToast === 'function'
+        ? fmToast(`You're on the waitlist for ${beerName}`, 'success')
+        : alert(`You're on the waitlist for ${beerName}!`));
     if ('Notification' in window) {
         Notification.requestPermission().then(permission => {
             if (permission === 'granted') {
-                new Notification('Fast Mart - Waitlist', {
+                new Notification('Fast Mart — Waitlist', {
                     body: `We'll notify you when ${beerName} is back in stock!`,
                     icon: '/icons/icon-192.png'
                 });
             } else {
-                alert(`You're on the waitlist for ${beerName}! We'll email you when it's back.`);
+                confirm();
             }
         });
     } else {
-        alert(`You're on the waitlist for ${beerName}!`);
+        confirm();
     }
 }
 

@@ -58,15 +58,8 @@ function initEntranceAnimations() {
         ease: 'power3.out'
     });
 
-    // Loyalty ring animation
-    setTimeout(() => {
-        const ring = document.getElementById('progressRing');
-        if (ring) {
-            ring.style.strokeDashoffset = '169.64'; // 70% progress
-        }
-        // Animate points counter
-        animateCounter('pointsDisplay', 0, 850, 1500);
-    }, 1000);
+    // (Loyalty ring + points counter are driven by modules/loyalty.js from
+    //  the loyalty service, so they reflect the live member state.)
 
     // Location card
     gsap.from('.location-card', {

@@ -33,26 +33,61 @@ maintainable layout. The look, feel, and behavior are unchanged.
     │   ├── tokens.css          # Design tokens (:root brand variables)
     │   ├── base.css            # Reset, body, loading screen, utilities
     │   ├── layout.css          # Nav, hero, section chrome, footer
-    │   ├── modules.css         # The 4 feature modules (cellar/loyalty/deals/concierge)
+    │   ├── modules.css         # Cellar / loyalty / deals / concierge
+    │   ├── services.css        # Cart drawer, reviews, loyalty controls, toast
     │   └── responsive.css      # Breakpoints + reduced-motion (loaded LAST)
     └── js/
         ├── data/
         │   ├── config.js       # Business NAP + chatbot answers (source of truth)
         │   ├── inventory.js    # Craft beer catalog (BEER_INVENTORY)
         │   └── deals.js        # Weekly deals (DAILY_DEALS)
+        ├── services/
+        │   └── store.js        # Mock backend (FastMartAPI) + fmToast — see below
         ├── modules/
         │   ├── loading.js      # Loading screen + kicks off entrance animations
         │   ├── three-scene.js  # 3D hero bottle + particles (needs global THREE)
         │   ├── animations.js   # GSAP scroll reveals + counter (needs gsap)
-        │   ├── inventory.js    # Module 2: search/render + waitlist notifications
-        │   ├── loyalty.js      # Module 3: referral link copy
-        │   ├── carousel.js     # Module 4: deals carousel (dots/arrows/swipe/autoplay)
-        │   ├── concierge.js    # Module 5: geolocation distance + directions
+        │   ├── inventory.js    # Cellar: search/render, add-to-cart, waitlist
+        │   ├── loyalty.js      # Loyalty dashboard: points/tier, redeem, refer, join
+        │   ├── carousel.js     # Deals carousel (dots/arrows/swipe/autoplay)
+        │   ├── concierge.js    # Geolocation distance + directions
         │   ├── chat.js         # FAQ chatbot
+        │   ├── cart.js         # Ordering: cart drawer + mock checkout
+        │   ├── reviews.js      # Reviews list + submit
         │   ├── nav.js          # Smooth scroll + mobile menu
         │   └── pwa.js          # Service worker registration
         └── main.js             # Entry point (init 3D scene, console branding)
 ```
+
+## Demo services (mock backend)
+
+So the client can click through real flows, the interactive features run against a
+**mock backend** in `src/js/services/store.js` (exposed as the global
+`FastMartAPI`). It persists to `localStorage` and returns Promises with simulated
+latency, so each method can later be swapped for a real API call with the same
+signature. What's live in the demo:
+
+- **Ordering** — "Add to Cart" on in-stock items → cart drawer (qty steppers,
+  subtotal) → mock checkout (name/phone/pickup) → order confirmation. No payment
+  is taken; orders are stored locally.
+- **Loyalty** — the dashboard reads a seeded member (Alex M., 850 pts), shows
+  tier progress on the gold ring, and supports **redeem** (100 pts → $5),
+  **refer a friend** (copies a link), and **join/switch member**. Placing an
+  order awards points (1 pt per $1).
+- **Reviews** — seeded reviews with an average-rating summary, plus a star-rating
+  submit form that persists and prepends.
+- **Inventory / waitlist / deals** — search and out-of-stock waitlist run through
+  the same service.
+
+To reset all demo state (cart, member, orders, reviews) from the browser console:
+
+```js
+FastMartAPI._reset()
+```
+
+> These are front-end stubs for review only — there is no server, payments, SMS,
+> or email. They map directly onto the PWA features in the business analysis
+> report (online ordering, loyalty program, review system).
 
 ### How the scripts load
 
