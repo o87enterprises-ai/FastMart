@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- ============================================ -->
+    <!-- PWA META & SOCIAL -->
+    <!-- ============================================ -->
+    <meta name="theme-color" content="#0D0A07">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fast Mart">
+    <meta name="description" content="Fast Mart - Premium Craft Beer & Convenience in Creswell, Oregon. Family-owned hidden gem for rare brews.">
+    <meta name="application-name" content="Fast Mart">
+
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Fast Mart - Craft Beer Boutique">
+    <meta property="og:description" content="Family-owned hidden gem for rare craft beers in Creswell, Oregon.">
+    <meta property="og:type" content="website">
+
+    <title>Fast Mart | Premium Craft Beer Boutique</title>
+
+    <!-- PWA Manifest & Icons -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+    <link rel="apple-touch-icon" href="/icons/icon.svg">
+
+    <!-- Google Fonts: Playfair Display (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Application styles (load order matters: tokens -> base -> layout -> modules -> responsive) -->
+    <link rel="stylesheet" href="/src/css/tokens.css">
+    <link rel="stylesheet" href="/src/css/base.css">
+    <link rel="stylesheet" href="/src/css/layout.css">
+    <link rel="stylesheet" href="/src/css/modules.css">
+    <link rel="stylesheet" href="/src/css/responsive.css">
+
+    <!-- JSON-LD Structured Data: LocalBusiness Schema.org -->
+    <!-- Improves local SEO and enables rich snippets (ratings, hours, address). -->
+    <!-- Keep these values in sync with src/js/data/config.js (NAP source of truth). -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Fast Mart",
+        "description": "Family-owned convenience store and craft beer boutique in Creswell, Oregon. Hidden gem for rare and premium craft beers.",
+        "url": "https://fastmartcreswell.com",
+        "telephone": "+1-541-895-3000",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "5 South Front St",
+            "addressLocality": "Creswell",
+            "addressRegion": "OR",
+            "postalCode": "97426",
+            "addressCountry": "US"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 43.9179,
+            "longitude": -123.0201
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "06:00",
+                "closes": "22:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Saturday", "Sunday"],
+                "opens": "07:00",
+                "closes": "23:00"
+            }
+        ],
+        "servesCuisine": ["Craft Beer", "Convenience", "Specialty Foods"],
+        "priceRange": "$$",
+        "image": "https://fastmartcreswell.com/images/storefront.jpg"
+    }
+    </script>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- LOADING SCREEN -->
+    <!-- ============================================ -->
+    <div id="loading-screen">
+        <div class="loader-gold-ring"></div>
+        <div class="loader-text">Fast Mart</div>
+        <div class="loader-subtext">Creswell, Oregon</div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- THREE.JS CANVAS -->
+    <!-- ============================================ -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- ============================================ -->
+    <!-- NAVIGATION -->
+    <!-- ============================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">FM</div>
+                <div class="nav-logo-text">Fast <span>Mart</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#cellar">The Cellar</a></li>
+                <li><a href="#loyalty">Loyalty</a></li>
+                <li><a href="#deals">Deals</a></li>
+                <li><a href="#concierge">Visit Us</a></li>
+            </ul>
+            <button class="nav-cta" onclick="document.getElementById('chatModal').classList.add('open')">
+                <i class="fas fa-comment-dots"></i> Chat
+            </button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- HERO SECTION -->
+    <!-- ============================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Family-Owned Since 1987
+            </div>
+            <h1>
+                Where <span class="gold-text">Craft</span> Meets<br>Community
+            </h1>
+            <p class="hero-subtitle">
+                Creswell's hidden gem for rare craft beers, local provisions,
+                and the warmest welcome in Lane County.
+            </p>
+            <div class="hero-cta-group">
+                <button class="btn-primary" onclick="scrollToSection('cellar')">
+                    <i class="fas fa-search"></i> Check Stock
+                </button>
+                <button class="btn-secondary" onclick="scrollToSection('concierge')">
+                    <i class="fas fa-map-marker-alt"></i> Find Us
+                </button>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================ -->
+    <div class="main-content">
+
+        <!-- ============================================ -->
+        <!-- MODULE 2: THE CELLAR - INVENTORY CHECKER -->
+        <!-- ============================================ -->
+        <section class="section cellar-section" id="cellar">
+            <div class="section-header">
+                <span class="section-label">The Cellar</span>
+                <h2 class="section-title">Check Our Stock</h2>
+                <p class="section-desc">
+                    Browse our curated selection of premium craft beers.
+                    Updated daily by our team.
+                </p>
+            </div>
+
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input
+                    type="text"
+                    class="search-input"
+                    id="beerSearch"
+                    placeholder="Search by name, brewery, or style..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="inventory-grid" id="inventoryGrid">
+                <!-- Beer cards rendered by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- MODULE 3: FOUNDERS' TABLE - LOYALTY DASHBOARD -->
+        <!-- ============================================ -->
+        <section class="section loyalty-section" id="loyalty">
+            <div class="section-header">
+                <span class="section-label">The Founders' Table</span>
+                <h2 class="section-title">Your Loyalty Dashboard</h2>
+                <p class="section-desc">
+                    Every visit earns you points. Every point brings you closer
+                    to exclusive rewards.
+                </p>
+            </div>
+
+            <div class="loyalty-card">
+                <div class="loyalty-tier">
+                    <i class="fas fa-crown"></i>
+                    Gold Member
+                </div>
+                <div class="member-name">Alex M.</div>
+                <div class="member-since">Member since March 2023</div>
+
+                <!-- Gold Ring Progress Bar with SVG Gradient -->
+                <svg width="0" height="0" style="position:absolute;">
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#C8A26E"/>
+                            <stop offset="50%" style="stop-color:#E8C99B"/>
+                            <stop offset="100%" style="stop-color:#C8A26E"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <div class="progress-ring-container">
+                    <svg class="progress-ring-svg" viewBox="0 0 200 200">
+                        <circle class="progress-ring-bg" cx="100" cy="100" r="90"/>
+                        <circle class="progress-ring-fill" id="progressRing" cx="100" cy="100" r="90"/>
+                    </svg>
+                    <div class="progress-ring-inner">
+                        <div class="progress-points" id="pointsDisplay">0</div>
+                        <div class="progress-label">Points</div>
+                    </div>
+                </div>
+
+                <p class="progress-next">
+                    <strong id="pointsNeeded">150</strong> points to
+                    <strong>Platinum</strong>
+                </p>
+
+                <button class="btn-referral" id="referralBtn">
+                    <i class="fas fa-gift"></i>
+                    Refer a Friend
+                </button>
+            </div>
+
+            <div class="referral-toast" id="referralToast">
+                <i class="fas fa-check-circle"></i> Referral link copied to clipboard!
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- MODULE 4: DAILY RITUAL - DEALS CAROUSEL -->
+        <!-- ============================================ -->
+        <section class="section deals-section" id="deals">
+            <div class="section-header">
+                <span class="section-label">The Daily Ritual</span>
+                <h2 class="section-title">This Week's Deals</h2>
+                <p class="section-desc">
+                    Something special every day of the week.
+                    Because you deserve it.
+                </p>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Slides rendered by JavaScript -->
+                </div>
+
+                <div class="carousel-nav" id="carouselDots">
+                    <!-- Dots rendered by JavaScript -->
+                </div>
+
+                <div class="carousel-arrows">
+                    <button class="carousel-arrow" id="prevBtn" onclick="moveCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-arrow" id="nextBtn" onclick="moveCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- MODULE 5: THE CONCIERGE - LOCATION & CHAT -->
+        <!-- ============================================ -->
+        <section class="section concierge-section" id="concierge">
+            <div class="section-header">
+                <span class="section-label">The Concierge</span>
+                <h2 class="section-title">Visit Us</h2>
+                <p class="section-desc">
+                    We're right here in the heart of Creswell.
+                    Come say hello.
+                </p>
+            </div>
+
+            <div class="concierge-grid">
+                <div class="location-card">
+                    <h3><i class="fas fa-store" style="color: var(--accent-gold); margin-right: 8px;"></i>Fast Mart</h3>
+                    <p class="address">5 South Front St<br>Creswell, OR 97426</p>
+                    <p class="hours">
+                        <strong>Mon–Fri:</strong> 6:00 AM – 10:00 PM<br>
+                        <strong>Sat–Sun:</strong> 7:00 AM – 11:00 PM
+                    </p>
+
+                    <div class="distance-display" id="distanceDisplay">
+                        <span>Click below to calculate your distance</span>
+                    </div>
+
+                    <button class="btn-directions" id="directionsBtn">
+                        <i class="fas fa-location-arrow"></i>
+                        Get Directions
+                    </button>
+                </div>
+
+                <div class="chat-preview">
+                    <div class="chat-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Ask Our Concierge</h3>
+                    <p>Have a question about our inventory, hours, or special orders? Our virtual concierge is here to help, 24/7.</p>
+                    <button class="btn-chat-open" onclick="document.getElementById('chatModal').classList.add('open')">
+                        <i class="fas fa-comments"></i>
+                        Start Chat
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- FOOTER -->
+        <!-- ============================================ -->
+        <footer class="footer">
+            <div class="footer-logo">Fast Mart</div>
+            <p class="footer-tagline">Family-owned. Community-loved. Craft-obsessed.</p>
+            <div class="footer-links">
+                <a href="#cellar">The Cellar</a>
+                <a href="#loyalty">Loyalty</a>
+                <a href="#deals">Deals</a>
+                <a href="#concierge">Visit</a>
+                <a href="#" onclick="alert('Privacy Policy coming soon'); return false;">Privacy</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Yelp"><i class="fab fa-yelp"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2024 Fast Mart. 5 South Front St, Creswell, OR 97426.</p>
+        </footer>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- FLOATING CHAT WIDGET -->
+    <!-- ============================================ -->
+    <div class="chat-widget">
+        <button class="chat-toggle" id="chatToggle" onclick="toggleChat()">
+            <div class="pulse-ring"></div>
+            <i class="fas fa-comment"></i>
+        </button>
+
+        <div class="chat-modal" id="chatModal">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-header-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="chat-header-text">
+                        <h4>Fast Mart Concierge</h4>
+                        <span><i class="fas fa-circle" style="font-size: 6px;"></i> Online</span>
+                    </div>
+                </div>
+                <button class="chat-close" onclick="toggleChat()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">
+                    Welcome to Fast Mart! I'm your virtual concierge. How can I help you today?
+                </div>
+            </div>
+
+            <div class="chat-quick-replies" id="quickReplies">
+                <button class="chat-quick-btn" onclick="sendQuickReply('What are your hours?')">Hours</button>
+                <button class="chat-quick-btn" onclick="sendQuickReply('Do you have IPA?')">IPA?</button>
+                <button class="chat-quick-btn" onclick="sendQuickReply('What are today\'s deals?')">Deals</button>
+                <button class="chat-quick-btn" onclick="sendQuickReply('Do you deliver?')">Delivery?</button>
+            </div>
+
+            <div class="chat-input-area">
+                <input
+                    type="text"
+                    class="chat-input"
+                    id="chatInput"
+                    placeholder="Type your question..."
+                    onkeypress="if(event.key==='Enter') sendMessage()"
+                >
+                <button class="chat-send" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- THIRD-PARTY LIBRARIES (CDN) -->
+    <!-- ============================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- ============================================ -->
+    <!-- APPLICATION SCRIPTS -->
+    <!-- Load order matters: data first, then modules, then main.     -->
+    <!-- These are classic (non-module) scripts so they share global   -->
+    <!-- scope and the inline onclick handlers above keep working.     -->
+    <!-- ============================================ -->
+    <script src="/src/js/data/config.js"></script>
+    <script src="/src/js/data/inventory.js"></script>
+    <script src="/src/js/data/deals.js"></script>
+
+    <script src="/src/js/modules/loading.js"></script>
+    <script src="/src/js/modules/three-scene.js"></script>
+    <script src="/src/js/modules/animations.js"></script>
+    <script src="/src/js/modules/inventory.js"></script>
+    <script src="/src/js/modules/loyalty.js"></script>
+    <script src="/src/js/modules/carousel.js"></script>
+    <script src="/src/js/modules/concierge.js"></script>
+    <script src="/src/js/modules/chat.js"></script>
+    <script src="/src/js/modules/nav.js"></script>
+    <script src="/src/js/modules/pwa.js"></script>
+
+    <script src="/src/js/main.js"></script>
+</body>
+</html>

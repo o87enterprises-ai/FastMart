@@ -1,0 +1,26 @@
+{
+  "name": "Fast Mart — Premium Craft Beer Boutique",
+  "short_name": "Fast Mart",
+  "description": "Family-owned convenience store and craft beer boutique in Creswell, Oregon.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0A07",
+  "theme_color": "#0D0A07",
+  "categories": ["shopping", "food", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "maskable"
+    }
+  ]
+}

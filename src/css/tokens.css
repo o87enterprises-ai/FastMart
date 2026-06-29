@@ -1,0 +1,29 @@
+/* ============================================ */
+/* DESIGN TOKENS — single source of truth for the brand palette. */
+/* Token-based design keeps the UI consistent and makes re-theming */
+/* a matter of editing this one file. */
+/* ============================================ */
+:root {
+    --bg-obsidian: #0D0A07;
+    --bg-obsidian-light: #1A1510;
+    --bg-obsidian-lighter: #252018;
+    --accent-gold: #C8A26E;
+    --accent-gold-light: #D4B47E;
+    --glow-ember: #E8C99B;
+    --text-primary: #F5F0EB;
+    --text-secondary: #B8A99A;
+    --text-muted: #7A6E63;
+    --glass-bg: rgba(200, 162, 110, 0.06);
+    --glass-border: rgba(200, 162, 110, 0.12);
+    --glass-border-hover: rgba(200, 162, 110, 0.25);
+    --shadow-gold: 0 0 30px rgba(200, 162, 110, 0.15);
+    --shadow-gold-strong: 0 0 50px rgba(200, 162, 110, 0.3);
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-luxury: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}

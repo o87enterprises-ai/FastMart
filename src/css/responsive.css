@@ -1,0 +1,69 @@
+/* ============================================ */
+/* RESPONSIVE DESIGN */
+/* Loaded last so these breakpoint rules win over the base/layout/ */
+/* module declarations they are meant to override. */
+/* ============================================ */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .hero {
+        padding: 100px 20px 60px;
+    }
+
+    .section {
+        padding: 60px 20px;
+    }
+
+    .concierge-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loyalty-card {
+        padding: 32px 24px;
+    }
+
+    .deal-card {
+        padding: 32px 20px;
+    }
+
+    .chat-modal {
+        right: 12px;
+        left: 12px;
+        width: auto;
+        bottom: 90px;
+    }
+
+    .chat-widget {
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .inventory-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1920px) {
+    .section {
+        max-width: 1400px;
+    }
+
+    .hero h1 {
+        font-size: 6rem;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

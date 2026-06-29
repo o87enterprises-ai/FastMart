@@ -1,0 +1,20 @@
+{
+  "name": "fast-mart",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fast Mart — Creswell, Oregon. Premium craft beer boutique & convenience store. Static PWA storefront.",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "start": "python3 -m http.server 8000",
+    "deploy": "wrangler pages deploy . --project-name fast-mart"
+  },
+  "keywords": [
+    "fast-mart",
+    "creswell",
+    "oregon",
+    "craft-beer",
+    "convenience-store",
+    "pwa"
+  ],
+  "license": "UNLICENSED"
+}
