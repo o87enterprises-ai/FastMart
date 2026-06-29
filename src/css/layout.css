@@ -171,18 +171,14 @@
     will-change: transform, opacity;
 }
 
-/* Placeholder logo (current sign). Framed like a lightbox panel so the
-   white sign sits cleanly on the deep-green hero. */
+/* Brand logo — transparent PNG, sits directly on the deep-green hero
+   with a soft drop-shadow for depth. */
 .hero-logo {
     display: block;
-    width: min(460px, 82vw);
+    width: min(520px, 86vw);
     height: auto;
-    margin: 0 auto 36px;
-    border-radius: var(--radius-md);
-    box-shadow:
-        0 24px 60px rgba(0, 0, 0, 0.55),
-        0 0 0 1px var(--glass-border),
-        var(--shadow-gold);
+    margin: 0 auto 32px;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45));
 }
 
 .hero-badge {

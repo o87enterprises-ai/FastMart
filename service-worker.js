@@ -5,7 +5,7 @@
 /* install so the shell still loads without a connection. Bump CACHE   */
 /* whenever you ship asset changes to force clients to refresh. */
 
-const CACHE = 'fast-mart-v2';
+const CACHE = 'fast-mart-v3';
 
 const PRECACHE = [
     '/',
